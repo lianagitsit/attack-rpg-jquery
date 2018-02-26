@@ -1,0 +1,22 @@
+.character {
+    height: 10em;
+    width: 12em;
+    margin: 5px;
+    border: 1px solid black;
+    text-align: center;
+    display: inline-block;
+}
+
+.character:hover {
+    cursor: pointer;
+}
+
+.character-name, .hit-points {
+    display: block;
+}
+
+.character-img {
+    height: 70%;
+    width: 70%;
+}
+
