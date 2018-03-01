@@ -26,6 +26,7 @@
             <span class="baby-title-text" id="y">Y</span>
             <span id="battle-title-text">BATTLE</span>
         </h1>
+        <p id="sound-msg" class="text-center">(Turn sound on.)</p>
         <div class="row" id="char-selection-area">
         </div>
         <div class="row">
@@ -38,7 +39,7 @@
         </div>
         <div class="row">
             <h3>Fight Section</h2>
-            <button class="btn btn-danger" id="attack-btn">Attack</button>
+            <button class="btn btn-lg btn-danger" id="attack-btn">Attack</button>
         </div>
         <div class="row">
             <div class="col-md-3 clear-padding" id="defender">
@@ -46,12 +47,12 @@
             </div>
             <div class="col-md-8" id="message-box">
                 <p id="message"></p>
-                <button class="btn btn-primary" id="restart-btn">Restart</button>
+                <button class="btn btn-lg btn-primary" id="restart-btn">Restart</button>
             </div>
-            <audio id="lullaby-audio" controls>
+            <audio id="lullaby-audio" loop>
                 <source src="assets/sounds/lullaby.mp3" type="audio/mpeg">
             </audio>
-            <audio id="fight-audio" controls>
+            <audio id="fight-audio" loop>
                 <source id="fight-source" src="" type="audio/mpeg">
             </audio>
         </div>

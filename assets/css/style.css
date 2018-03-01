@@ -79,9 +79,13 @@ h3{
     cursor: pointer;
 }
 
-.character-name, .health-points {
+.character-name, .health-points, #sound-msg {
     display: block;
     font-family: Courier, monospace;
+}
+
+#sound-msg { 
+    color: rgb(224, 84, 252);
 }
 
 .character-img {
@@ -92,7 +96,6 @@ h3{
 #message {
     font-family: 'Schoolbell', cursive;
     font-size: 2.5em;
-    margin-top: 3em;
     /* color: rgb(190, 98, 243); */
     color: rgb(122, 223, 122);
 }

@@ -6,13 +6,22 @@ $(document).ready(function () {
     var defeatedEnemies = [];
     var counter = 0;
     var audioOn;
+    
+    // SOUND
+    var lullaby = document.getElementById("lullaby-audio");
+    var fightMusic = document.getElementById("fight-audio");
+    var fightSource = document.getElementById("fight-source");
+    fightSource.setAttribute("src", "assets/sounds/fight.mp3");
+    fightMusic.load();
+    fightMusic.controls = false;
+
 
     // Instantiate game characters
     // TODO: Algorithm for balance?
-    var baby = new Character("baby", "assets/images/baby.jpeg", 100, 6, 5);
-    var bunny = new Character("bunny", "assets/images/bunny.jpeg", 120, 8, 7);
-    var puppy = new Character("puppy", "assets/images/puppy.jpeg", 140, 10, 9);
-    var sloth = new Character("sloth", "assets/images/sloth.jpeg", 300, 12, 11);
+    var baby = new Character("baby", "assets/images/baby.jpeg", 100, 5, 8);
+    var bunny = new Character("bunny", "assets/images/bunny.jpeg", 120, 8, 10);
+    var puppy = new Character("puppy", "assets/images/puppy.jpeg", 150, 10, 12);
+    var sloth = new Character("sloth", "assets/images/sloth.jpeg", 180, 12, 15);
 
     // TODO: on refresh, get a new selection of characters to play
     function Character(name, imagePathStr, healthPoints, attackPower, counterAttackPower) {
@@ -57,10 +66,13 @@ $(document).ready(function () {
             // Move the player character to the Your Character area
             detachedDiv = $(target).detach();
             $("#user-character").append(detachedDiv);
+            $(detachedDiv).css({"border": "4px solid rgb(122, 223, 122)"})
 
             // Move remaining characters to the Available Enemies area
             detachedDiv = $("#char-selection-area").children().detach();
             $("#enemies").append(detachedDiv);
+            $(detachedDiv).css({"border": "4px solid red", "color": "red"});
+
 
         } else {
             // After a player selection is made, player selects a defender
@@ -91,13 +103,17 @@ $(document).ready(function () {
                 // Move the defender to the Defender Area
                 detachedDiv = $(target).detach();
                 $("#defender").append(detachedDiv);
+                $(detachedDiv).css({"background-color": "black"})
 
                 // Reset the message display
                 if ($("#message").text()) {
                     $("#message").text("");
                 }
 
-
+                // Pause lullaby and start Mortal Kombat
+                lullaby.pause();
+                fightMusic.controls = true;
+                fightMusic.play();
             }
         }
     }
@@ -152,29 +168,13 @@ $(document).ready(function () {
         $("#" + defender.name).children("span.health-points").text(defender.healthPoints);
         $("#" + player.name).children("span.health-points").text(player.healthPoints);
 
-        console.log("ATTACK #" + counter);
-        console.log(player.name + " attacks and does " + player.attackPower + " damage!");
-        console.log(defender.name + "'s HP is now " + defender.healthPoints);
-        console.log("But " + defender.name + " counter-attacks and does " + defender.counterAttackPower + " damage!");
-        console.log(player.name + "'s HP is now " + player.healthPoints);
-
     }
 
     function restart() {
         location.reload();
     }
 
-
-    // var lullaby = document.getElementById("lullaby-audio");
-    // // lullaby.play();
-
-    // // MORTAL KOMBAT
-    // var fightMusic = document.getElementById("fight-audio");
-    // var fightSource = document.getElementById("fight-source");
-    // fightSource.setAttribute("src", "assets/sounds/fight.mp3");
-    // fightMusic.load();
-    // fightMusic.play();
-
+    lullaby.play();
 
     $(".character").on("click", startGame);
     $("#attack-btn").on("click", attack);
