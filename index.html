@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Baby Battle!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Trade+Winds" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/css?family=Londrina+Shadow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Schoolbell" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Margarine" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
@@ -15,25 +19,41 @@
 
 <body>
     <div class="container">
-        <h1 class="text-center">BABY BATTLE!</h1>
+        <h1>
+            <span class="baby-title-text" id="b1">B</span>
+            <span class="baby-title-text" id="a">A</span>
+            <span class="baby-title-text" id="b2">B</span>
+            <span class="baby-title-text" id="y">Y</span>
+            <span id="battle-title-text">BATTLE</span>
+        </h1>
         <div class="row" id="char-selection-area">
         </div>
-        <div class="container" id="user-character">
-            <h3>Your Character</h2>
+        <div class="row">
+            <div class="col-md-4 clear-padding" id="user-character">
+                <h3>Your Character</h2>
+            </div>
+            <div class="col-md-8 clear-padding" id="enemies">
+                <h3>Enemies</h2>
+            </div>
         </div>
-        <div class="container" id="enemies">
-            <h3>Enemies Available to Attack</h2>
-        </div>
-        <div class="container">
+        <div class="row">
             <h3>Fight Section</h2>
-            <button id="attack-btn">Attack</button>
+            <button class="btn btn-danger" id="attack-btn">Attack</button>
         </div>
-        <div class="container" id="defender">
-            <h3>Defender</h3>
-        </div>
-        <div class="container" id="message-box">
-            <p id="message"></p>
-            <button id="restart-btn">Restart</button>
+        <div class="row">
+            <div class="col-md-3 clear-padding" id="defender">
+                <h3>Defender</h3>
+            </div>
+            <div class="col-md-8" id="message-box">
+                <p id="message"></p>
+                <button class="btn btn-primary" id="restart-btn">Restart</button>
+            </div>
+            <audio id="lullaby-audio" controls>
+                <source src="assets/sounds/lullaby.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="fight-audio" controls>
+                <source id="fight-source" src="" type="audio/mpeg">
+            </audio>
         </div>
     </div>
 
