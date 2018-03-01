@@ -2,6 +2,8 @@ $(document).ready(function () {
     var player, defender, detachedDiv;
     var isGameOn = false;
     var isBattleOn = false;
+    var defeatedEnemies = [];
+    var counter = 0;
 
     // Instantiate the game characters
     var baby = new Character("baby", "assets/images/baby.jpeg", 100, 6, 5);
@@ -14,18 +16,19 @@ $(document).ready(function () {
         this.name = name;
         this.imagePathStr = imagePathStr;
         this.healthPoints = healthPoints;
+        this.baseAttackPower = attackPower;
         this.attackPower = attackPower;
         this.counterAttackPower = counterAttackPower;
 
-        this.attack = function () {
-            console.log(this.name + " attacks and does " + this.attackPower + " damage!");
-        }
+        // this.attack = function () {
+        //     console.log(this.name + " attacks and does " + this.attackPower + " damage!");
+        // }
 
         // Build character element in DOM
         $("#char-selection-area").append("<div class='character' id=" + this.name + ">");
         $("#" + this.name).append("<span class='character-name'>" + this.name + "</span>");
         $("#" + this.name).append("<img class='character-img img-responsive center-block' src=" + this.imagePathStr + " />");
-        $("#" + this.name).append("<span class='health-points>" + this.healthPoints + "</span>");
+        $("#" + this.name).append("<span class='health-points'>" + this.healthPoints + "</span>");
 
     }
 
@@ -60,7 +63,7 @@ $(document).ready(function () {
             detachedDiv = $("#char-selection-area").children().detach();
             $("#enemies").append(detachedDiv);
 
-            player.attack();
+            // player.attack();
         } else {
             // After a player selection is made, player selects a defender
             if (!isBattleOn) {
@@ -89,8 +92,43 @@ $(document).ready(function () {
         }
     }
 
+    function attack(){
+        if (isBattleOn){
+
+            defender.healthPoints -= player.attackPower;
+            player.healthPoints -= defender.counterAttackPower;
+
+            // Add base to attack power only after the first attack
+            counter++;
+            if (counter > 1){
+                player.attackPower += player.baseAttackPower;
+            }
+
+            $("#" + defender.name).children("span.health-points").text(defender.healthPoints);
+            $("#" + player.name).children("span.health-points").text(player.healthPoints);
+
+            //TODO: If defender's HP <= 0, no counter-attack dealt
+            
+            console.log("ATTACK #" + counter);
+            console.log(player.name + " attacks and does " + player.attackPower + " damage!");
+            console.log(defender.name + "'s HP is now " + defender.healthPoints);
+            console.log("But " + defender.name + " counter-attacks and does " + defender.counterAttackPower + " damage!");
+            console.log(player.name + "'s HP is now " + player.healthPoints);
+
+
+            if (defender.healthPoints <= 0){
+                detachedDiv = $("#defender").children().detach();
+                defeatedEnemies.push(detachedDiv);
+                isBattleOn = false;
+            }
+        }
+    }
+
     // Player chooses a character
     $(".character").on("click", startGame);
+
+    // Attack button 
+    $("#attack-btn").on("click", attack);
 
 
     // console.log("ready!");
